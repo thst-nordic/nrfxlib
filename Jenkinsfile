@@ -112,7 +112,7 @@ pipeline {
 
             // Run the compliance check
             try {
-              sh "../ci-tools/scripts/check_compliance.py $COMPLIANCE_ARGS --commits $COMMIT_RANGE)"
+              sh "../ci-tools/scripts/check_compliance.py $COMPLIANCE_ARGS --commits $COMMIT_RANGE"
             }
             finally {
               junit 'compliance.xml'
