@@ -65,7 +65,7 @@ pipeline {
       }
     }
     stage('Checkout repositories') {
-      when { expression { CI_STATE.NRFXLIB.RUN_TESTS.toBoolean() } }
+      when { expression { CI_STATE.NRFXLIB.RUN_TESTS } }
       steps {
         script {
           lib_Main.cloneCItools(JOB_NAME)
@@ -86,7 +86,7 @@ pipeline {
     // }
     
     stage('Run compliance check') {
-      when { expression { CI_STATE.NRFXLIB.RUN_TESTS.toBoolean() } }
+      when { expression { CI_STATE.NRFXLIB.RUN_TESTS } }
       steps {
         dir('nrf') {
           script {
