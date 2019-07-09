@@ -3,8 +3,6 @@
 
 def AGENT_LABELS = lib_Main.getAgentLabels(JOB_NAME)
 def IMAGE_TAG = lib_Main.getDockerImage(JOB_NAME)
-def REPO_CI_TOOLS = "https://github.com/zephyrproject-rtos/ci-tools.git"
-def REPO_CI_TOOLS_SHA = "bfe635f102271a4ad71c1a14824f9d5e64734e57"
 def CI_STATE = new HashMap()
 
 pipeline {
@@ -29,8 +27,7 @@ pipeline {
   }
 
   options {
-    checkoutToSubdirectory('nrf')
-    disableConcurrentBuilds()
+    checkoutToSubdirectory('nrfxlib')
   }
 
   triggers {
