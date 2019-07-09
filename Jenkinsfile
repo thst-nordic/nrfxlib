@@ -134,7 +134,6 @@ pipeline {
         script {
           CI_STATE.NRFXLIB.WAITING = true
           def DOWNSTREAM_JOBS = lib_Main.getDownStreamJobs(CI_STATE, 'NRFXLIB')
-          println "DOWNSTREAM_JOBS = " + DOWNSTREAM_JOBS
           def jobs = [:]
           DOWNSTREAM_JOBS.each {
             jobs["${it}"] = {
