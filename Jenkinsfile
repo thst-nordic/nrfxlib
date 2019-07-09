@@ -86,15 +86,15 @@ pipeline {
     // }
     
     stage('Run compliance check') {
-      when { expression { CI_STATE.NRF.RUN_TESTS.toBoolean() } }
+      when { expression { CI_STATE.NRFXLIB.RUN_TESTS.toBoolean() } }
       steps {
         dir('nrf') {
           script {
             // If we're a pull request, compare the target branch against the current HEAD (the PR), and also report issues to the PR
             def BUILD_TYPE = lib_Main.getBuildType(CI_STATE.NRFXLIB)
             if (BUILD_TYPE == "PR") {
-              COMMIT_RANGE = "$CI_STATE.NRF.MERGE_BASE..$CI_STATE.NRF.REPORT_SHA"
-              COMPLIANCE_ARGS = "$COMPLIANCE_ARGS -p $CHANGE_ID -S $CI_STATE.NRF.REPORT_SHA -g"
+              COMMIT_RANGE = "$CI_STATE.NRFXLIB.MERGE_BASE..$CI_STATE.NRFXLIB.REPORT_SHA"
+              COMPLIANCE_ARGS = "$COMPLIANCE_ARGS -p $CHANGE_ID -S $CI_STATE.NRFXLIB.REPORT_SHA -g"
               println "Building a PR [$CHANGE_ID]: $COMMIT_RANGE"
             }
             else if (BUILD_TYPE == "TAG") {
