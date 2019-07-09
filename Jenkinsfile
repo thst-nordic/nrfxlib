@@ -88,7 +88,7 @@ pipeline {
     stage('Run compliance check') {
       when { expression { CI_STATE.NRFXLIB.RUN_TESTS } }
       steps {
-        dir('nrf') {
+        dir('nrfxlib') {
           script {
             // If we're a pull request, compare the target branch against the current HEAD (the PR), and also report issues to the PR
             def BUILD_TYPE = lib_Main.getBuildType(CI_STATE.NRFXLIB)
