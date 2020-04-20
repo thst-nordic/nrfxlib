@@ -144,7 +144,7 @@ pipeline
     }
     cleanup {
         echo "cleanup"
-        cleanWs()
+        // cleanWs()
     }
   }
 }
