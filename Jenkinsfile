@@ -61,18 +61,11 @@ pipeline
   stages {
     stage('Load')     { steps { script { CI_STATE = lib_State.load('NRFXLIB', CI_STATE) }}}
     stage('Checkout') { steps { script {
-        CI_STATE.SELF.REPORT_SHA = lib_Main.checkoutRepo(CI_STATE.SELF.GIT_URL, "nrfxlib", CI_STATE.SELF, false)
-        lib_West.AddManifestUpdate("NRFXLIB", 'nrfxlib', CI_STATE.SELF.GIT_URL, CI_STATE.SELF.GIT_REF, CI_STATE)
-    } } }
-    stage('West Update') {
-      when { expression { CI_STATE.SELF.RUN_TESTS || CI_STATE.SELF.RUN_BUILD } }
-      steps { script {
-        lib_Status.set('PENDING', 'NRFXLIB', CI_STATE)
         lib_Main.checkoutRepo(CI_STATE.NRF.GIT_URL, "nrf", CI_STATE.NRF, true)
         lib_West.InitUpdate('nrf', 'ci-tools')
-        lib_West.ApplyManifestUpdates(CI_STATE)
-      }}
-    }
+        CI_STATE.SELF.REPORT_SHA = lib_Main.checkoutRepo(CI_STATE.SELF.GIT_URL, "nrfxlib", CI_STATE.SELF, false)
+        lib_Status.set('PENDING', 'NRFXLIB', CI_STATE)
+    } } }
     stage('Run compliance check') {
       when { expression { CI_STATE.SELF.RUN_TESTS } }
       steps {
